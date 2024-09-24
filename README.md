@@ -11,6 +11,9 @@ This API allows users to manage books, borrow and return them, and reserve books
 - Reserve books and automatic borrowing for reserved users
 - Pagination for books listing
 
+## RENDER LINK
+- https://e-book-app-eaf7.onrender.com
+
 ## Installation
 
 1. Clone the repository:
@@ -31,7 +34,7 @@ cd e-book-management-app
 npm install
 \`\`\`
 
-4. Create a `.env` file in the root directory and set up your environment variables:
+4. Create a \`.env\` file in the root directory and set up your environment variables:
 
 \`\`\`env
 MONGO_URI=<your_mongodb_connection_string>
@@ -55,9 +58,26 @@ The server should be running at \`http://localhost:4000\`.
   \`POST /api/users/register\`  
   Create a new user account.
 
+  #### JSON Request:
+  \`\`\`json
+  {
+    "name": "John Doe",
+    "email": "john@example.com",
+    "password": "securepassword"
+  }
+  \`\`\`
+
 - **Login User**  
   \`POST /api/users/login\`  
   Authenticate a user and return a JWT.
+
+  #### JSON Request:
+  \`\`\`json
+  {
+    "email": "john@example.com",
+    "password": "securepassword"
+  }
+  \`\`\`
 
 - **Logout User**  
   \`GET /api/users/logout\`  
@@ -68,6 +88,16 @@ The server should be running at \`http://localhost:4000\`.
 - **Create a New Book**  
   \`POST /api/books/create\`  
   Requires authentication. Add a new book to the system.
+
+  #### JSON Request:
+  \`\`\`json
+  {
+    "title": "The Great Gatsby",
+    "authorId": "64e8fc6bf7c8a1e9d0375555",
+    "authorName": "F. Scott Fitzgerald",
+    "genre": "Fiction"
+  }
+  \`\`\`
 
 - **Get All Books (with Pagination)**  
   \`GET /api/books?page={page}&limit={limit}\`  
@@ -80,6 +110,15 @@ The server should be running at \`http://localhost:4000\`.
 - **Update a Book**  
   \`PATCH /api/books/:id\`  
   Requires authentication. Update book details.
+
+  #### JSON Request:
+  \`\`\`json
+  {
+    "title": "The Great Gatsby - Updated",
+    "authorName": "F. Scott Fitzgerald",
+    "genre": "Classic"
+  }
+  \`\`\`
 
 - **Delete a Book**  
   \`DELETE /api/books/:id\`  
@@ -100,6 +139,13 @@ The server should be running at \`http://localhost:4000\`.
 - **Reserve a Book**  
   \`POST /api/books/reserve/:id\`  
   Requires authentication. Reserve a book for future borrowing.
+
+  #### JSON Request:
+  \`\`\`json
+  {
+    "userId": "64e8fc6bf7c8a1e9d0375555"
+  }
+  \`\`\`
 
 - **Get Book Reservations**  
   \`GET /api/books/reservations/:id\`  
